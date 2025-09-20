@@ -1,0 +1,42 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String       @id @default(auto()) @map("_id") @db.ObjectId
+  username  String       @unique
+  password  String
+  role      Role
+  createdAt DateTime     @default(now())
+
+  invitations Invitation[]
+}
+
+model Invitation {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  guestName     String
+  rsvpStatus    RsvpStatus  @default(PENDING)
+  sentStatus    Boolean     @default(false)
+  barcode       String      @unique
+  scanned       Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+
+  inviterId     String      @db.ObjectId
+  inviter       User        @relation(fields: [inviterId], references: [id])
+}
+
+enum Role {
+  ADMIN
+  SCANNER
+}
+
+enum RsvpStatus {
+  PENDING
+  ATTENDING
+  NOT_ATTENDING
+}

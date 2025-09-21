@@ -3,16 +3,22 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
+import { sidebarConfig } from "../../layout/sidebar/sidebarConfig";
 
 export default function Breadcrumbs({
   className = "",
   itemClass = "",
   activeClass = "",
-  labelMap = {},
 }) {
   const pathname = usePathname();
   const pathParts = pathname.split("/").filter(Boolean);
   if (pathParts.length === 0) return null;
+
+  const labelMap = sidebarConfig.items.reduce((acc, item) => {
+    const parts = item.href.split("/").filter(Boolean);
+    acc[parts[parts.length - 1]] = item.title;
+    return acc;
+  }, {});
 
   const linkClass =
     "text-gray-500 capitalize hover:underline focus:underline focus:outline-none";

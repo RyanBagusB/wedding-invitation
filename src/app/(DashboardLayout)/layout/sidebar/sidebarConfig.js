@@ -1,13 +1,9 @@
 import {
   SquareTerminal,
   LayoutDashboard,
-  Package,
-  Users,
-  Tags,
-  ShoppingCart,
-  TicketPercent,
-  MessageSquare,
   LogOut,
+  Mail,
+  Users,
 } from "lucide-react";
 
 export const sidebarConfig = {
@@ -21,39 +17,19 @@ export const sidebarConfig = {
   },
   items: [
     {
-      title: "Dashboard",
+      title: "Beranda",
       href: "/dashboard",
       icon: (props) => <LayoutDashboard {...props} />,
     },
     {
-      title: "Products",
-      href: "/dashboard/products",
-      icon: (props) => <Package {...props} />,
+      title: "Daftar Tamu",
+      href: "/dashboard/invitations",
+      icon: (props) => <Mail {...props} />,
     },
     {
-      title: "Customers",
-      href: "/dashboard/customers",
+      title: "Tamu Saya",
+      href: "/dashboard/my-invitations",
       icon: (props) => <Users {...props} />,
-    },
-    {
-      title: "Category",
-      href: "/dashboard/category",
-      icon: (props) => <Tags {...props} />,
-    },
-    {
-      title: "Orders",
-      href: "/dashboard/orders",
-      icon: (props) => <ShoppingCart {...props} />,
-    },
-    {
-      title: "Coupons",
-      href: "/dashboard/coupons",
-      icon: (props) => <TicketPercent {...props} />,
-    },
-    {
-      title: "Chats",
-      href: "/dashboard/chats",
-      icon: (props) => <MessageSquare {...props} />,
     },
   ],
   logout: {

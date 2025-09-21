@@ -28,7 +28,7 @@ export default function DataTable({ columns, data }) {
                     key={col.accessor}
                     className="px-4 py-3 sm:px-3 sm:py-2 md:px-2 md:py-2 whitespace-nowrap"
                   >
-                    {row[col.accessor]}
+                    {col.cell ? col.cell(row) : row[col.accessor]}
                   </td>
                 ))}
               </tr>

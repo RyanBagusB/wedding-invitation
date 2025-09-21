@@ -24,7 +24,7 @@ export default function SidebarItem({ item, isActive, isMinimized }) {
   ].join(" ");
 
   const textClasses = [
-    "inline-block transition-all duration-300 origin-left text-base sm:text-lg",
+    "inline-block whitespace-nowrap transition-all duration-300 origin-left text-base sm:text-lg",
     isActive
       ? "dark:text-violet-50 sm:text-violet-500 sm:dark:text-violet-500"
       : "text-slate-800 dark:text-gray-400 sm:dark:text-violet-50",

@@ -1,8 +1,11 @@
 "use client";
 
 import { sidebarConfig } from "./sidebarConfig";
+import { useRouter } from "next/navigation";
 
 export default function SidebarLogout({ isMinimized }) {
+  const router = useRouter();
+
   const btnClasses = [
     "flex items-center gap-3 group",
     "px-6 sm:px-2 py-2",
@@ -26,10 +29,19 @@ export default function SidebarLogout({ isMinimized }) {
     "group-hover:text-red-600 group-focus:text-red-600 transition-colors duration-200",
   ].join(" ");
 
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      router.push("/authentication/login");
+    } catch (err) {
+      console.error("Logout gagal:", err);
+    }
+  };
+
   return (
     <button
       type="button"
-      onClick={() => console.log("Logout action here")}
+      onClick={handleLogout}
       aria-label={sidebarConfig.logout.title}
       aria-describedby="logout-description"
       className={btnClasses}

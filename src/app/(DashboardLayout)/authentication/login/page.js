@@ -1,35 +1,53 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Card from "../../components/ui/card/Index";
 import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({ username: "", password: "" });
+  const [errors, setErrors] = useState({});
   const [loginError, setLoginError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    let validationErrors = {};
 
-    const newErrors = {
-      username: !username.trim() ? "Username is required" : "",
-      password: !password.trim() ? "Password is required" : "",
-    };
+    if (!username.trim()) validationErrors.username = "Username wajib diisi";
+    if (!password.trim()) validationErrors.password = "Password wajib diisi";
 
-    setErrors(newErrors);
-    setLoginError("");
-
-    if (newErrors.username || newErrors.password) return;
-
-    if (username !== "admin" || password !== "123456") {
-      setLoginError("Invalid username or password");
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
-    console.log("Logging in with:", { username, password });
+    setErrors({});
+    setLoginError("");
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setLoginError(data.error || "Login gagal");
+        return;
+      }
+
+      router.push("/dashboard"); // redirect setelah login sukses
+    } catch (err) {
+      console.error(err);
+      setLoginError("Terjadi kesalahan, coba lagi.");
+    }
   };
 
   return (

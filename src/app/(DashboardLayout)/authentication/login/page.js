@@ -43,7 +43,7 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/dashboard"); // redirect setelah login sukses
+      router.push("/dashboard");
     } catch (err) {
       console.error(err);
       setLoginError("Terjadi kesalahan, coba lagi.");

@@ -22,7 +22,7 @@ model Invitation {
   guestName     String
   rsvpStatus    RsvpStatus  @default(PENDING)
   sentStatus    Boolean     @default(false)
-  barcode       String      @unique
+  barcode       String?     @unique
   scanned       Boolean     @default(false)
   createdAt     DateTime    @default(now())
 

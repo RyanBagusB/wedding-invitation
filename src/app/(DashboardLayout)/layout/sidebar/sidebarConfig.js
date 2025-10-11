@@ -4,6 +4,7 @@ import {
   LogOut,
   Mail,
   Users,
+  QrCode,
 } from "lucide-react";
 
 export const sidebarConfig = {
@@ -30,6 +31,11 @@ export const sidebarConfig = {
       title: "Tamu Saya",
       href: "/dashboard/my-invitations",
       icon: (props) => <Users {...props} />,
+    },
+    {
+      title: "Scan",
+      href: "/dashboard/scan",
+      icon: (props) => <QrCode {...props} />,
     },
   ],
   logout: {

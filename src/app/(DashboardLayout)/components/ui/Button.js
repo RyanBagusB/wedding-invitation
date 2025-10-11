@@ -19,7 +19,13 @@ export default function Button({
     ghost:
       "bg-transparent border-slate-800 text-slate-800 hover:bg-violet-50 dark:border-violet-50 dark:text-violet-50 dark:hover:bg-slate-800",
     ghostBorderless:
-      "bg-transparent border-transparent text-slate-800 hover:bg-violet-50 dark:text-violet-50 dark:hover:bg-slate-800"
+      "bg-transparent border-transparent text-slate-800 hover:bg-violet-50 dark:text-violet-50 dark:hover:bg-slate-800",
+
+    red: "bg-red-500 border-transparent text-white hover:bg-red-600 dark:bg-red-400 dark:text-neutral-800 dark:hover:bg-red-300",
+    blue: "bg-blue-500 border-transparent text-white hover:bg-blue-600 dark:bg-blue-400 dark:text-neutral-800 dark:hover:bg-blue-300",
+    green: "bg-green-500 border-transparent text-white hover:bg-green-600 dark:bg-green-400 dark:text-neutral-800 dark:hover:bg-green-300",
+    yellow:
+      "bg-yellow-400 border-transparent text-slate-900 hover:bg-yellow-500 dark:bg-yellow-300 dark:text-neutral-800 dark:hover:bg-yellow-200",
   };
 
   const sizes = {
@@ -28,7 +34,6 @@ export default function Button({
     lg: "px-4 py-2 text-base md:px-5 md:py-3 md:text-lg",
     icon: "p-1.5 text-xs aspect-square md:p-2 md:text-sm",
   };
-
 
   const classes = `${base} ${variants[variant] || ""} ${sizes[size] || ""} ${className}`;
 

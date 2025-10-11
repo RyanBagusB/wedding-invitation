@@ -1,3 +1,17 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+@theme {
+  --font-analogue: "Analogue", sans-serif; 
+  --font-poppins: "poppins", sans-serif; 
+  --font-editors-light: "editors-light", sans-serif; 
+  --font-creattion: "creattion", sans-serif; 
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}

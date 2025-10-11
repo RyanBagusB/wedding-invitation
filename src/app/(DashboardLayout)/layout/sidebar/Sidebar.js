@@ -1,15 +1,15 @@
 "use client";
 
 import { useSidebar } from "../context/SidebarProvider";
-import { sidebarConfig } from "./sidebarConfig";
 
 import SidebarOverlay from "./SidebarOverlay";
 import SidebarHeader from "./SidebarHeader";
 import SidebarNav from "./SidebarNav";
+import { sidebarConfig } from "./sidebarConfig";
 
-export default function Sidebar() {
+export default function Sidebar({ role }) {
   const { toggle, isMinimized } = useSidebar();
-  const { width, logo, items, classes } = sidebarConfig;
+  const { width, logo, classes } = sidebarConfig;
   const LogoIcon = logo.icon;
 
   return (
@@ -33,9 +33,8 @@ export default function Sidebar() {
           classes={classes}
         />
         <SidebarNav
-          items={items}
+          role={role}
           isMinimized={isMinimized}
-          classes={classes}
         />
       </aside>
     </>

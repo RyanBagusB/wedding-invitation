@@ -20,7 +20,7 @@ async function main() {
     where: { username: "admin" },
     update: {},
     create: {
-      username: "admin",
+      username: "ayah",
       password: defaultPassword,
       role: "ADMIN",
     },
@@ -38,19 +38,19 @@ async function main() {
 
   const guestNames = ["Eisen", "Stark", "Fern", "Flamme", "Grundel"];
 
-  for (const name of guestNames) {
-    const barcode = generateBarcode(name);
-    await prisma.invitation.upsert({
-      where: { barcode },
-      update: {},
-      create: {
-        guestName: name,
-        inviterId: admin.id,
-        barcode,
-      },
-    });
-    console.log(`Tamu ${name} dengan barcode ${barcode} berhasil dibuat`);
-  }
+  // for (const name of guestNames) {
+  //   const barcode = generateBarcode(name);
+  //   await prisma.invitation.upsert({
+  //     where: { barcode },
+  //     update: {},
+  //     create: {
+  //       guestName: name,
+  //       inviterId: admin.id,
+  //       barcode,
+  //     },
+  //   });
+  //   console.log(`Tamu ${name} dengan barcode ${barcode} berhasil dibuat`);
+  // }
 
   console.log("Seeder selesai: admin, scanner, dan tamu telah dibuat.");
 }

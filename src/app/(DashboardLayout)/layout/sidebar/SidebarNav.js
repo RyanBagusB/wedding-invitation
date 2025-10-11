@@ -5,8 +5,15 @@ import { sidebarConfig } from "./sidebarConfig";
 import SidebarItem from "./SidebarItem";
 import SidebarLogout from "./SidebarLogout";
 
-export default function SidebarNav({ isMinimized }) {
+export default function SidebarNav({ role, isMinimized }) {
   const pathname = usePathname();
+
+  const items =
+    role === "SCANNER"
+      ? sidebarConfig.items.filter(
+          (item) => item.href !== "/dashboard/my-invitations"
+        )
+      : sidebarConfig.items;
 
   return (
     <nav
@@ -15,7 +22,7 @@ export default function SidebarNav({ isMinimized }) {
       aria-label="Main sidebar"
     >
       <div className="space-y-1">
-        {sidebarConfig.items.map((item) => (
+        {items.map((item) => (
           <SidebarItem
             key={item.title}
             item={item}

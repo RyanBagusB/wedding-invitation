@@ -8,13 +8,13 @@ generator client {
 }
 
 model User {
-  id        String       @id @default(auto()) @map("_id") @db.ObjectId
-  username  String       @unique
-  password  String
-  role      Role
-  createdAt DateTime     @default(now())
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  username     String        @unique
+  password     String
+  role         Role
+  createdAt    DateTime      @default(now())
 
-  invitations Invitation[]
+  invitations  Invitation[]
 }
 
 model Invitation {
@@ -25,6 +25,7 @@ model Invitation {
   barcode       String?     @unique
   scanned       Boolean     @default(false)
   createdAt     DateTime    @default(now())
+  arrivalTime   DateTime?
 
   inviterId     String      @db.ObjectId
   inviter       User        @relation(fields: [inviterId], references: [id])

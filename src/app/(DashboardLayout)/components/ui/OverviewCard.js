@@ -3,7 +3,6 @@ import Card from "./card/Index";
 export default function OverviewCard({
   title,
   value,
-  description,
   icon: Icon,
   iconColor = "text-violet-500",
 }) {

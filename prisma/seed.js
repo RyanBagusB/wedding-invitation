@@ -20,7 +20,7 @@ async function main() {
     where: { username: "admin" },
     update: {},
     create: {
-      username: "ayah",
+      username: "Rohmad",
       password: defaultPassword,
       role: "ADMIN",
     },

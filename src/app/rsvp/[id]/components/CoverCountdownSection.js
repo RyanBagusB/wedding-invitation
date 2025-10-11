@@ -41,31 +41,7 @@ export default function CoverCountdownSection({ countdown, opened }) {
           <span>.</span>
           <span className="tracking-widest">2025</span>
         </div>
-
-        <motion.div
-          initial={{ y: 10, opacity: 0 }}
-          animate={opened ? { y: 0, opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-          className="w-full flex text-xl font-semibold justify-evenly max-w-xs"
-        >
-          <div className="flex flex-col">
-            <p className="text-2xl">{countdown.days}</p>
-            <p className="text-xs leading-1">Hari</p>
-          </div>
-          <div className="flex flex-col">
-            <p className="text-2xl">{countdown.hours}</p>
-            <p className="text-xs leading-1">Jam</p>
-          </div>
-          <div className="flex flex-col">
-            <p className="text-2xl">{countdown.minutes}</p>
-            <p className="text-xs leading-1">Menit</p>
-          </div>
-          <div className="flex flex-col">
-            <p className="text-2xl">{countdown.seconds}</p>
-            <p className="text-xs leading-1">Detik</p>
-          </div>
-        </motion.div>
-
+        
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={opened ? { y: 0, opacity: 1 } : {}}

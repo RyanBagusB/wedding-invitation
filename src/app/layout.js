@@ -67,7 +67,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${analogue.variable} ${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${editorsLight.variable} ${creattion.variable} antialiased`}
+        className={`${analogue.variable} ${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${editorsLight.variable} ${creattion.variable} bg-black antialiased`}
       >
         {children}
       </body>

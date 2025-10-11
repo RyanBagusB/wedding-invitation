@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import curtainImg from "../../../../images/0-PEMBUKA.jpg";
+import curtainImg from "../../../../images/pembuka.jpg";
 import { Mail } from "lucide-react";
 
 export default function Curtain({ name, opened, onOpen }) {
@@ -34,7 +34,7 @@ export default function Curtain({ name, opened, onOpen }) {
             />
           </div>
 
-          <div className="absolute flex flex-col items-center justify-end inset-0 py-10 px-4 text-white text-center gap-y-6">
+          <div className="absolute flex flex-col items-center justify-end inset-0 py-12 px-4 text-white text-center gap-y-6">
             <div className="flex flex-col gap-y-2 text-center">
               <motion.h3
                 className="text-base font-semibold tracking-widest"

@@ -29,7 +29,7 @@ export default function InvitationPageClient({ invitation }) {
       <div className={`${!opened ? "overflow-hidden min-h-screen" : ""} flex flex-col`}>
         <CoverCountdownSection countdown={countdown} opened={opened} />
         <VerseSection />
-        <CoupleSection />
+        {/* <CoupleSection /> */}
         <SaveTheDateSection countdown={countdown} />
         <WeddingEventSection />
         <GallerySection />

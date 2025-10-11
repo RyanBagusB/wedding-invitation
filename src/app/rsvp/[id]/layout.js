@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import img1 from "../../../images/0-PEMBUKA.jpg";
+import img1 from "../../../images/pembuka.jpg";
 // import img2 from "../../../images/1-COVER-1-150x150.jpg";
 // import img3 from "../../../images/1-COVER-2-150x150.jpg";
 
@@ -20,7 +20,7 @@ export default function Layout({ children }) {
   return (
     <main className="relative flex flex-col h-screen overflow-x-hidden overflow-y-auto">
       {/* Semua background selalu ada di DOM, hanya opasitas yang berubah */}
-      <div className="fixed inset-0 -z-10">
+      <div className="fixed inset-0 -z-10 min-h-screen">
         {images.map((img, i) => (
           <motion.div
             key={i}

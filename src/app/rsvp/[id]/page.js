@@ -7,9 +7,11 @@ async function getInvitation(id) {
   return prisma.invitation.findUnique({
     where: { id },
     select: {
+      id: true,
       guestName: true,
       rsvpStatus: true,
       barcode: true,
+      arrivalTime: true,
     },
   });
 }

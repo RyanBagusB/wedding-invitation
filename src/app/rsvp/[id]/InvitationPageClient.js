@@ -15,18 +15,30 @@ import ClosingSection from "./components/ClosingSection";
 
 export default function InvitationPageClient({ invitation }) {
   const [opened, setOpened] = useState(false);
-
   const countdown = useCountdown("2025-11-08T00:00:00");
+
+  // Pastikan arrivalTime diformat jadi string jam, bukan Date object
+  const formattedArrivalTime = invitation?.arrivalTime
+    ? new Date(invitation.arrivalTime).toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    : null;
 
   return (
     <div className="flex flex-col relative min-h-screen">
       <Curtain
         name={invitation?.guestName ?? "Tamu"}
+        time={formattedArrivalTime}
         opened={opened}
         onOpen={() => setOpened(true)}
       />
 
-      <div className={`${!opened ? "overflow-hidden min-h-screen" : ""} flex flex-col`}>
+      <div
+        className={`${
+          !opened ? "overflow-hidden min-h-screen" : ""
+        } flex flex-col`}
+      >
         <CoverCountdownSection countdown={countdown} opened={opened} />
         <VerseSection />
         {/* <CoupleSection /> */}
@@ -34,7 +46,7 @@ export default function InvitationPageClient({ invitation }) {
         <WeddingEventSection />
         <GallerySection />
         <WeddingGiftSection />
-        <BarcodeSection barcode={invitation?.barcode} />
+        <BarcodeSection invitationId={invitation.id} barcode={invitation?.barcode} rsvpStatus={invitation.rsvpStatus} />
         <ClosingSection />
       </div>
     </div>

@@ -7,20 +7,44 @@ import imgTreeShadow from "../../../../images/img-tree-shadow-01.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertCircle, Check, CircleCheck, CircleX, X } from "lucide-react";
 
-export default function BarcodeSection({ barcode, invitationId }) {
-  const [status, setStatus] = useState(null); // null | "hadir" | "tidak"
-  const [submitted, setSubmitted] = useState(false);
+export default function BarcodeSection({ barcode, invitationId, rsvpStatus }) {
+  const RsvpStatus = {
+    PENDING: "PENDING",
+    ATTENDING: "ATTENDING",
+    NOT_ATTENDING: "NOT_ATTENDING",
+  };
+
+  // Tentukan nilai awal berdasarkan rsvpStatus
+  const initialStatus =
+    rsvpStatus === RsvpStatus.ATTENDING
+      ? "hadir"
+      : rsvpStatus === RsvpStatus.NOT_ATTENDING
+      ? "tidak"
+      : null;
+
+  const initialSubmitted =
+    rsvpStatus === RsvpStatus.PENDING || !rsvpStatus ? false : true;
+
+  const [status, setStatus] = useState(initialStatus); // "hadir" | "tidak" | null
+  const [submitted, setSubmitted] = useState(initialSubmitted);
 
   const handleSubmit = async () => {
     if (!status) return;
 
+    // Ubah status lokal ("hadir"/"tidak") ke format enum untuk API
+    const mappedStatus =
+      status === "hadir" ? RsvpStatus.ATTENDING : RsvpStatus.NOT_ATTENDING;
+
     try {
-      await fetch(`/api/invitations/rsvp/${invitationId}`, {
-        method: "POST",
+      await fetch(`/api/invitations/${invitationId}/rsvp`, {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({ status: mappedStatus }),
       });
+
+      // Setelah berhasil dikirim, ubah state submitted dan status agar konsisten
       setSubmitted(true);
+      setStatus(status === "hadir" ? "hadir" : "tidak");
     } catch (error) {
       console.error("Gagal mengirim konfirmasi:", error);
     }
@@ -62,23 +86,30 @@ export default function BarcodeSection({ barcode, invitationId }) {
               transition={{ duration: 0.6 }}
               className="relative max-w-lg text-left rounded-md bg-white p-6"
             >
-              <ol className="list-decimal list-inside text-sm font-poppins leading-relaxed space-y-1">
-                <li>
-                  Pilih tombol <span className="font-semibold">Hadir</span> atau{" "}
-                  <span className="font-semibold">Tidak Hadir</span>.
-                </li>
-                <li>
-                  Tekan tombol <span className="font-semibold">Kirim</span> untuk
-                  mengonfirmasi pilihan Anda.
-                </li>
-                <li>
-                  Jika memilih <span className="font-semibold">Hadir</span>, barcode
-                  khusus akan muncul sebagai tanda masuk acara.
-                </li>
-                <li>
-                  Tunjukkan barcode tersebut kepada panitia saat kedatangan.
-                </li>
-              </ol>
+<ol className="list-decimal list-inside text-sm font-poppins leading-relaxed space-y-1">
+  <li>
+    Pilih tombol <span className="font-semibold">Hadir</span> atau{" "}
+    <span className="font-semibold">Tidak Hadir</span>.
+  </li>
+  <li>
+    Tekan tombol <span className="font-semibold">Kirim</span> untuk
+    mengonfirmasi pilihan Anda.
+  </li>
+  <li>
+    Jika memilih <span className="font-semibold">Hadir</span>, barcode
+    khusus akan muncul sebagai tanda masuk acara.
+  </li>
+  <li>
+    Tunjukkan barcode tersebut kepada panitia saat kedatangan.
+  </li>
+  <li>
+    Barcode ini juga akan digunakan untuk{" "}
+    <span className="font-semibold">penukaran suvenir</span> dan{" "}
+    <span className="font-semibold">akan discan oleh panitia</span> sebagai
+    tanda kehadiran Anda telah tercatat.
+  </li>
+</ol>
+
             </motion.div>
             <div className="max-w-lg bg-white rounded-md p-6 space-y-2 flex flex-col items-center text-center gap-2 font-semibold text-[#444444]">
               <AlertCircle className="w-12 h-12" />
@@ -138,16 +169,16 @@ export default function BarcodeSection({ barcode, invitationId }) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative bg-white p-6 rounded-2xl shadow-lg"
+            className="relative bg-white p-6 rounded-xl"
           >
             {barcode ? (
               <QRCodeCanvas
                 value={barcode}
-                size={180}
+                size={240}
                 bgColor="#ffffff"
                 fgColor="#333333"
                 level="H"
-                marginSize={4}
+                marginSize={2}
               />
             ) : (
               <p className="text-gray-400">Barcode tidak tersedia</p>

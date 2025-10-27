@@ -1,24 +1,13 @@
 // components/WeddingEventSection.jsx
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import img1 from "../../../../images/0-PEMBUKA.jpg";
+import { AnimatePresence } from "framer-motion";
+import img1 from "../../../../images/akad-nikah.jpeg";
+import img2 from "../../../../images/resepsi.jpeg";
 import Image from "next/image";
 import { Clock } from "lucide-react";
 
-const images = [img1, img1, img1];
-
 export default function WeddingEventSection() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="text-white py-10 bg-black/20">
       {/* Header */}
@@ -36,20 +25,13 @@ export default function WeddingEventSection() {
           {/* Image slider */}
           <div className="w-full relative overflow-hidden aspect-video rounded-tr-[100px] bg-white">
             <AnimatePresence initial={false} mode="wait">
-              <motion.div
-                key={index}
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "-100%" }}
-                transition={{ duration: 1, ease: "easeInOut" }}
-                className="absolute inset-0 bg-white"
-              >
+              <div className="absolute inset-0 bg-white">
                 <Image
-                  src={images[index]}
-                  alt={`Bride ${index + 1}`}
+                  src={img1}
+                  alt="Akad Nikah"
                   className="object-cover w-full h-full bg-white"
                 />
-              </motion.div>
+              </div>
             </AnimatePresence>
           </div>
 
@@ -94,20 +76,13 @@ export default function WeddingEventSection() {
           {/* Image slider */}
           <div className="w-full relative overflow-hidden aspect-video rounded-tl-[100px] bg-white">
             <AnimatePresence initial={false} mode="wait">
-              <motion.div
-                key={index}
-                initial={{ x: "-100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ duration: 1, ease: "easeInOut" }}
-                className="absolute inset-0 bg-white"
-              >
+              <div className="absolute inset-0 bg-white">
                 <Image
-                  src={images[index]}
-                  alt={`Bride ${index + 1}`}
+                  src={img2}
+                  alt="Resepsi"
                   className="object-cover w-full h-full bg-white"
                 />
-              </motion.div>
+              </div>
             </AnimatePresence>
           </div>
 
@@ -115,10 +90,10 @@ export default function WeddingEventSection() {
           <div className="flex bg-white">
             <div className="flex flex-col p-6 text-[#5e5e5e] gap-y-2 w-full">
               <div className="flex border-b border-[#5e5e5e] gap-x-4 px-4 py-4 w-full">
-                <p className="text-6xl font-analogue">17</p>
+                <p className="text-6xl font-analogue">8</p>
                 <div className="flex flex-col text-sm">
-                  <p>Kamis</p>
-                  <p>April</p>
+                  <p>Sabtu</p>
+                  <p>November</p>
                   <p>2025</p>
                 </div>
               </div>
@@ -126,7 +101,7 @@ export default function WeddingEventSection() {
               <div className="flex flex-col gap-y-4">
                 <div className="flex items-center gap-2  text-[#5e5e5e]">
                   <Clock className="w-4 h-4" />
-                  <span className="text-sm">19:00 - Selesai</span>
+                  <span className="text-sm">16:00 - Selesai</span>
                 </div>
 
                 <p className="text-sm tracking-widest font-bold">LOKASI ACARA</p>

@@ -6,7 +6,7 @@ import { Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
 
 // import gambar statis (Next.js akan handle optimasi)
-import img1 from "../../../../images/0-PEMBUKA.jpg";
+import img1 from "../../../../images/save-the-date.jpeg";
 
 export default function SaveTheDateSection({ countdown }) {
   const calendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Resepsi+Pernikahan&dates=20251108T000000/20251108T235900&details=Undangan+Pernikahan&sf=true&output=xml`;

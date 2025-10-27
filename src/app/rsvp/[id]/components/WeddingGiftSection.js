@@ -5,20 +5,15 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import img1 from "../../../../images/0-PEMBUKA.jpg";
+import img1 from "../../../../images/akad-nikah.jpeg";
+import bca from "../../../../images/bca.png";
 
 const accounts = [
   {
     bank: "BCA",
-    logo: img1,
-    number: "123123123",
-    name: "Putri Cantika Sari",
-  },
-  {
-    bank: "BCA",
-    logo: img1,
-    number: "321321321",
-    name: "Putra Andika Pratama",
+    logo: bca,
+    number: "0240838451",
+    name: "prisella ayu dio",
   },
 ];
 
@@ -88,7 +83,7 @@ export default function GiftSection() {
                   alt={acc.bank}
                   width={50}
                   height={50}
-                  className="object-contain"
+                  className="object-contain bg-white"
                 />
                 <div className="font-poppins">
                   <p className="text-xs italic">No Rekening</p>

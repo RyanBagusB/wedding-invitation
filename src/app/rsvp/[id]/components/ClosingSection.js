@@ -21,7 +21,7 @@ export default function ClosingSection() {
           Kami Yang Berbahagia
         </p>
         <p className="font-analogue text-2xl italic font-bold">
-          Prisella & Rohmad
+          Prisella <span className="font-poppins font-normal">&</span> Rohmad
         </p>
       </div>
     </section>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import curtainImg from "../../../../images/pembuka.jpg";
 import { Mail } from "lucide-react";
 
-export default function Curtain({ name, opened, onOpen }) {
+export default function Curtain({ name, time, opened, onOpen }) {
   return (
     <AnimatePresence>
       {!opened && (
@@ -46,8 +46,8 @@ export default function Curtain({ name, opened, onOpen }) {
               </motion.h3>
               <motion.h2
                 className="font-analogue text-4xl tracking-wide"
-                initial={{ scale: 0.8, opacity: 0 }} // mulai kecil & transparan
-                animate={{ scale: 1, opacity: 1 }}   // membesar & terlihat
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
               >
                 Prisella & Rohmad
@@ -73,6 +73,17 @@ export default function Curtain({ name, opened, onOpen }) {
                 </motion.p>
               </motion.div>
 
+              {/* Tambahan jam kedatangan */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 1.6, ease: "easeOut" }}
+              >
+                <p className="text-xs font-poppins tracking-wide">
+                  Disarankan hadir pada pukul <span className="font-semibold">{time}</span>
+                </p>
+              </motion.div>
+
               <motion.div 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -84,7 +95,7 @@ export default function Curtain({ name, opened, onOpen }) {
                   onClick={onOpen}
                   animate={{ y: 0, opacity: 1, scale: [1, 1.1, 1] }}
                   transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-                  whileHover={{ scale: 0.95, transition: { type: "tween", duration: 0.3, ease: "easeInOut" } }}
+                  whileHover={{ scale: 0.95, transition: { type: 'tween', duration: 0.3, ease: 'easeInOut' } }}
                 >
                   <Mail className="w-5 h-5 text-white" />
                   <span className="leading-1.5">Buka Undangan</span>

@@ -5,9 +5,12 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // contoh gambar
-import img1 from "../../../../images/0-PEMBUKA.jpg";
+import img1 from "../../../../images/pembuka.jpg";
+import img2 from "../../../../images/save-the-date.jpeg";
+import img3 from "../../../../images/akad-nikah.jpeg";
+import img4 from "../../../../images/resepsi.jpeg";
 
-const images = [img1, img1, img1, img1, img1];
+const images = [img1, img2, img3, img4];
 
 export default function GallerySection() {
   const [selected, setSelected] = useState(0);
@@ -37,13 +40,6 @@ export default function GallerySection() {
 
   // Scroll thumbnail aktif hanya jika bukan autoplay
   useEffect(() => {
-    if (!isAuto && thumbnailsRef.current[selected]) {
-      thumbnailsRef.current[selected].scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest",
-      });
-    }
     setIsAuto(false);
   }, [selected]);
 

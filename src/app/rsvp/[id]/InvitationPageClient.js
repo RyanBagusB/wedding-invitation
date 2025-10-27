@@ -19,10 +19,9 @@ export default function InvitationPageClient({ invitation }) {
 
   // Pastikan arrivalTime diformat jadi string jam, bukan Date object
   const formattedArrivalTime = invitation?.arrivalTime
-    ? new Date(invitation.arrivalTime).toLocaleTimeString("id-ID", {
-        hour: "2-digit",
-        minute: "2-digit",
-      })
+    ? new Date(invitation.arrivalTime)
+        .toISOString()
+        .slice(11, 16) // ambil jam dan menit "HH:MM"
     : null;
 
   return (

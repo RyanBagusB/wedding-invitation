@@ -35,7 +35,7 @@ export async function generateMetadata({ params }) {
       siteName: "The Wedding of Prisella & Rohmad",
       images: [
         {
-          url: `${baseUrl}/pengantin.jpg`, // foto pengantin kamu
+          url: `${baseUrl}/pengantin.webp`, // foto pengantin kamu
           width: 1200,
           height: 630,
           alt: "Prisella & Rohmad Wedding",
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }) {
       card: "summary_large_image",
       title: `Undangan untuk ${guestName} | The Wedding of Prisella & Rohmad`,
       description: "Klik untuk membuka undangan pernikahan.",
-      images: [`${baseUrl}/pengantin.jpg`],
+      images: [`${baseUrl}/pengantin.webp`],
     },
   };
 }

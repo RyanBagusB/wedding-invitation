@@ -86,29 +86,29 @@ export default function BarcodeSection({ barcode, invitationId, rsvpStatus }) {
               transition={{ duration: 0.6 }}
               className="relative max-w-lg text-left rounded-md bg-white p-6"
             >
-<ol className="list-decimal list-inside text-sm font-poppins leading-relaxed space-y-1">
-  <li>
-    Pilih tombol <span className="font-semibold">Hadir</span> atau{" "}
-    <span className="font-semibold">Tidak Hadir</span>.
-  </li>
-  <li>
-    Tekan tombol <span className="font-semibold">Kirim</span> untuk
-    mengonfirmasi pilihan Anda.
-  </li>
-  <li>
-    Jika memilih <span className="font-semibold">Hadir</span>, barcode
-    khusus akan muncul sebagai tanda masuk acara.
-  </li>
-  <li>
-    Tunjukkan barcode tersebut kepada panitia saat kedatangan.
-  </li>
-  <li>
-    Barcode ini juga akan digunakan untuk{" "}
-    <span className="font-semibold">penukaran suvenir</span> dan{" "}
-    <span className="font-semibold">akan discan oleh panitia</span> sebagai
-    tanda kehadiran Anda telah tercatat.
-  </li>
-</ol>
+            <ol className="list-decimal list-inside text-sm font-poppins leading-relaxed space-y-1">
+              <li>
+                Pilih tombol <span className="font-semibold">Hadir</span> atau{" "}
+                <span className="font-semibold">Tidak Hadir</span>.
+              </li>
+              <li>
+                Tekan tombol <span className="font-semibold">Kirim</span> untuk
+                mengonfirmasi pilihan Anda.
+              </li>
+              <li>
+                Jika memilih <span className="font-semibold">Hadir</span>, barcode
+                khusus akan muncul sebagai tanda masuk acara.
+              </li>
+              <li>
+                Tunjukkan barcode tersebut kepada panitia saat kedatangan.
+              </li>
+              <li>
+                Barcode ini juga akan digunakan untuk{" "}
+                <span className="font-semibold">penukaran suvenir</span> dan{" "}
+                <span className="font-semibold">akan discan oleh panitia</span> sebagai
+                tanda kehadiran Anda telah tercatat.
+              </li>
+            </ol>
 
             </motion.div>
             <div className="max-w-lg bg-white rounded-md p-6 space-y-2 flex flex-col items-center text-center gap-2 font-semibold text-[#444444]">

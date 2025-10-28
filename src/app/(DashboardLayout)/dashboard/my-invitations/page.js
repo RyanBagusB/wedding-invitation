@@ -18,12 +18,14 @@ export default async function MyInvitationsPage() {
   if (role !== "ADMIN") notFound();
 
   const userId = authToken.replace("dummy_token_", "");
+  const inviter = await prisma.user.findUnique({ where: { id: userId } });
   const myInvitations = await prisma.invitation.findMany({
     where: { inviterId: userId },
   });
 
   return (
     <InvitationsWrapper
+      inviter={inviter.username}
       initialInvitations={myInvitations}
       userId={userId}
     />

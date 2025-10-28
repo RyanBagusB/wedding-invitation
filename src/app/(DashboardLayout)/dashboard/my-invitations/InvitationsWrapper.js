@@ -7,7 +7,7 @@ import Breadcrumbs from "../../components/ui/Breadcrumbs";
 import Card from "../../components/ui/card/Index";
 import { UserCheck, Search } from "lucide-react";
 
-export default function InvitationsWrapper({ initialInvitations, userId }) {
+export default function InvitationsWrapper({ inviter, initialInvitations, userId }) {
   const [invitations, setInvitations] = useState(initialInvitations);
   const [filter, setFilter] = useState("ALL");
   const [search, setSearch] = useState("");
@@ -155,6 +155,7 @@ export default function InvitationsWrapper({ initialInvitations, userId }) {
 
         <Card.Body>
           <MyInvitationsTable
+            inviter={inviter}
             invitations={filtered}
             onUpdate={handleUpdate}
             onDelete={handleDelete}

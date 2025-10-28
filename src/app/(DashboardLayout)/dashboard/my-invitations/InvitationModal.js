@@ -4,6 +4,7 @@ import UpdateInvitationForm from "./UpdateInvitationForm";
 import { useState } from "react";
 
 export default function InvitationModal({
+  inviter,
   isOpen,
   mode,
   selected,
@@ -12,10 +13,10 @@ export default function InvitationModal({
   onDelete,
 }) {
   const [copied, setCopied] = useState(false);
+  console.log(inviter);
 
   if (!isOpen) return null;
 
-  // base URL untuk RSVP
   const baseUrl =
     typeof window !== "undefined"
       ? window.location.origin
@@ -23,11 +24,30 @@ export default function InvitationModal({
 
   const rsvpLink = `${baseUrl}/rsvp/${selected?.id}`;
 
-  const handleCopy = () => {
-    const fullText = `
+  // pesan khusus jika inviter mama
+  const getMessageText = () => {
+    if (inviter?.toLowerCase() === "mama") {
+      return `
 Assalamu'alaikum Warahmatullahi Wabarakatuh.
 
-Maha suci Allah yang telah menjadikan segala sesuatu lebih indah dan sempurna.
+Maha suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan dan menjadikan segala sesuatu lebih indah dan sempurna.
+
+Izinkan kami mengundang Bapak/Ibu/Sahabat sekalian untuk dapat menghadiri acara pernikahan putri kami.
+
+Link undangan: ${rsvpLink}
+
+Kehadiran, doa dan restu anda semua adalah kado terindah bagi kami. Tiada yang dapat kami ungkapkan selain rasa terima kasih dari hati yang tulus dan dalam.
+
+Kami yang berbahagia
+
+Agus Bs & Rustiyah
+      `;
+    }
+
+    return `
+Assalamu'alaikum Warahmatullahi Wabarakatuh.
+
+Maha suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan dan menjadikan segala sesuatu lebih indah dan sempurna.
 
 Izinkan kami mengundang Bapak/Ibu/Sahabat sekalian untuk dapat menghadiri acara pernikahan kami.
 
@@ -39,7 +59,10 @@ Kami yang berbahagia
 
 Prisella & Rohmad
     `;
-    navigator.clipboard.writeText(fullText.trim());
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(getMessageText().trim());
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -56,27 +79,63 @@ Prisella & Rohmad
           : "Hapus Tamu"
       }
     >
-      {/* Body scrollable */}
       <div className="max-h-[60vh] overflow-y-auto space-y-4">
         {mode === "detail" && selected && (
           <>
-            <p>Assalamu&apos;alaikum Warahmatullahi Wabarakatuh.</p>
-            <p>Maha suci Allah yang telah menjadikan segala sesuatu lebih indah dan sempurna.</p>
-            <p>
-              Izinkan kami mengundang Bapak/Ibu/Sahabat sekalian untuk dapat menghadiri acara pernikahan kami.
-            </p>
-            <p>
-              Link undangan: <br />
-              <span className="break-all font-mono">{rsvpLink}</span>
-            </p>
-            <p>
-              Kehadiran, doa dan restu anda semua adalah kado terindah bagi kami. Tiada yang dapat kami ungkapkan selain rasa terima kasih dari hati yang tulus dan dalam.
-            </p>
-            <p>
-              Kami yang berbahagia
-              <br />
-              Prisella & Rohmad
-            </p>
+            {inviter?.toLowerCase() === "mama" ? (
+              <>
+                <p>Assalamu&apos;alaikum Warahmatullahi Wabarakatuh.</p>
+                <p>
+                  Maha suci Allah yang telah menciptakan makhluk-Nya
+                  berpasang-pasangan dan menjadikan segala sesuatu lebih indah
+                  dan sempurna.
+                </p>
+                <p>
+                  Izinkan kami mengundang Bapak/Ibu/Sahabat sekalian untuk dapat
+                  menghadiri acara pernikahan putri kami.
+                </p>
+                <p>
+                  Link undangan: <br />
+                  <span className="break-all font-mono">{rsvpLink}</span>
+                </p>
+                <p>
+                  Kehadiran, doa dan restu anda semua adalah kado terindah bagi
+                  kami. Tiada yang dapat kami ungkapkan selain rasa terima kasih
+                  dari hati yang tulus dan dalam.
+                </p>
+                <p>
+                  Kami yang berbahagia
+                  <br />
+                  Agus Bs & Rustiyah
+                </p>
+              </>
+            ) : (
+              <>
+                <p>Assalamu&apos;alaikum Warahmatullahi Wabarakatuh.</p>
+                <p>
+                  Maha suci Allah yang telah menjadikan segala sesuatu lebih
+                  indah dan sempurna.
+                </p>
+                <p>
+                  Izinkan kami mengundang Bapak/Ibu/Sahabat sekalian untuk dapat
+                  menghadiri acara pernikahan kami.
+                </p>
+                <p>
+                  Link undangan: <br />
+                  <span className="break-all font-mono">{rsvpLink}</span>
+                </p>
+                <p>
+                  Kehadiran, doa dan restu anda semua adalah kado terindah bagi
+                  kami. Tiada yang dapat kami ungkapkan selain rasa terima kasih
+                  dari hati yang tulus dan dalam.
+                </p>
+                <p>
+                  Kami yang berbahagia
+                  <br />
+                  Prisella & Rohmad
+                </p>
+              </>
+            )}
 
             <div className="flex justify-end gap-2 pt-2">
               <Button variant="primary" onClick={handleCopy}>

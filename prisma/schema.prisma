@@ -29,6 +29,17 @@ model Invitation {
 
   inviterId     String      @db.ObjectId
   inviter       User        @relation(fields: [inviterId], references: [id])
+
+  comments      Comment[]
+}
+
+model Comment {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  message       String
+  createdAt     DateTime     @default(now())
+
+  invitationId  String       @db.ObjectId
+  invitation    Invitation   @relation(fields: [invitationId], references: [id])
 }
 
 enum Role {

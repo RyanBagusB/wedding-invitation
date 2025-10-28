@@ -12,6 +12,7 @@ import BarcodeSection from "./components/BarcodeSection";
 import GallerySection from "./components/GallerySection";
 import WeddingGiftSection from "./components/WeddingGiftSection";
 import ClosingSection from "./components/ClosingSection";
+import MessageSection from "./components/MessageSection";
 
 export default function InvitationPageClient({ invitation }) {
   const [opened, setOpened] = useState(false);
@@ -46,6 +47,7 @@ export default function InvitationPageClient({ invitation }) {
         <GallerySection />
         <WeddingGiftSection />
         <BarcodeSection invitationId={invitation.id} barcode={invitation?.barcode} rsvpStatus={invitation.rsvpStatus} />
+        <MessageSection invitationId={invitation.id} />
         <ClosingSection />
       </div>
     </div>

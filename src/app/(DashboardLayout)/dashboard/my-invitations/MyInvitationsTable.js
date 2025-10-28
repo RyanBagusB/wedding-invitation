@@ -6,7 +6,7 @@ import InvitationActions from "./InvitationActions";
 import InvitationModal from "./InvitationModal";
 import StatusBadge from "../../components/ui/StatusBadge";
 
-export default function MyInvitationsTable({ invitations, onUpdate, onDelete }) {
+export default function MyInvitationsTable({ inviter, invitations, onUpdate, onDelete }) {
   const [selected, setSelected] = useState(null);
   const [mode, setMode] = useState(null);
 
@@ -47,10 +47,7 @@ export default function MyInvitationsTable({ invitations, onUpdate, onDelete }) 
     sentType: inv.sentStatus ? "green" : "red",
     scanned: inv.scanned ? "Hadir" : "Belum Hadir",
     arrivalTime: inv.arrivalTime
-      ? new Date(inv.arrivalTime).toLocaleTimeString("id-ID", {
-          hour: "2-digit",
-          minute: "2-digit",
-        })
+      ? new Date(inv.arrivalTime).toISOString().slice(11, 16) // hasil: "16:00"
       : "-",
   }));
 
@@ -100,6 +97,7 @@ export default function MyInvitationsTable({ invitations, onUpdate, onDelete }) 
       <DataTable columns={columns} data={data} />
 
       <InvitationModal
+        inviter={inviter}
         isOpen={!!selected}
         mode={mode}
         selected={selected}

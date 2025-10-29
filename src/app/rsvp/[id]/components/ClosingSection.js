@@ -5,7 +5,7 @@ export default function ClosingSection() {
   return (
     <section className="relative font-poppins text-center text-white px-8 py-16 pb-24 flex flex-col gap-y-8 text-sm">
       {/* Overlay gradasi dari bawah ke atas */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent pointer-events-none" />
 
       <div className="relative z-10 flex flex-col gap-y-8">
         <h2 className="text-5xl font-creattion">Terima Kasih</h2>

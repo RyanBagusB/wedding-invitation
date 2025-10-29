@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from "react";
 
-export default function MessageSection({ invitationId }) {
+export default function MessageSection() {
+  const [guestName, setGuestName] = useState("");
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
 
-  // Ambil seluruh ucapan berdasarkan invitationId
+  // Ambil seluruh ucapan
   const fetchComments = async () => {
     try {
       const res = await fetch("/api/comments");
@@ -22,11 +23,15 @@ export default function MessageSection({ invitationId }) {
   };
 
   useEffect(() => {
-    if (invitationId) fetchComments();
-  }, [invitationId]);
+    fetchComments();
+  }, []);
 
   const handleSubmit = async () => {
-    if (!message.trim()) return;
+    if (!guestName.trim() || !message.trim()) {
+      setError("Nama dan ucapan wajib diisi.");
+      return;
+    }
+
     setIsSending(true);
     setError(null);
 
@@ -34,14 +39,15 @@ export default function MessageSection({ invitationId }) {
       const res = await fetch("/api/comments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, invitationId }),
+        body: JSON.stringify({ guestName, message }),
       });
 
       if (!res.ok) throw new Error("Gagal mengirim ucapan");
 
+      setGuestName("");
       setMessage("");
       setSent(true);
-      fetchComments(); // refresh daftar ucapan setelah kirim
+      fetchComments(); // refresh daftar ucapan
       setTimeout(() => setSent(false), 2000);
     } catch (err) {
       console.error("Error:", err);
@@ -65,6 +71,15 @@ export default function MessageSection({ invitationId }) {
 
       {/* Form Ucapan */}
       <div className="flex flex-col justify-center gap-4 w-full text-[#5E5E5E] max-w-lg px-8">
+        {/* Input Nama */}
+        <input
+          type="text"
+          value={guestName}
+          onChange={(e) => setGuestName(e.target.value)}
+          placeholder="Masukkan nama kamu..."
+          className="w-full bg-white p-3 rounded-xs border border-[#B0B0B0] text-sm font-poppins focus:outline-none focus:ring-2 focus:ring-[#5E5E5E50]"
+        />
+
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -84,10 +99,10 @@ export default function MessageSection({ invitationId }) {
         {/* Tombol Kirim */}
         <button
           onClick={handleSubmit}
-          disabled={isSending || !message.trim()}
+          disabled={isSending || !guestName.trim() || !message.trim()}
           className={`w-full py-2 text-sm font-semibold tracking-wide transition-colors
             ${
-              isSending || !message.trim()
+              isSending || !guestName.trim() || !message.trim()
                 ? "bg-[#5E5E5E80] text-white cursor-not-allowed"
                 : "bg-[#5E5E5E] text-white hover:bg-[#444444]"
             }`}

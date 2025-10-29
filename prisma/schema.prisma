@@ -34,12 +34,13 @@ model Invitation {
 }
 
 model Comment {
-  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
   message       String
-  createdAt     DateTime     @default(now())
+  guestName     String?
+  createdAt     DateTime      @default(now())
 
-  invitationId  String       @db.ObjectId
-  invitation    Invitation   @relation(fields: [invitationId], references: [id])
+  invitationId  String?       @db.ObjectId
+  invitation    Invitation?   @relation(fields: [invitationId], references: [id])
 }
 
 enum Role {

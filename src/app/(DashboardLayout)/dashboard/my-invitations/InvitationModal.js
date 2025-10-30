@@ -13,8 +13,6 @@ export default function InvitationModal({
   onDelete,
 }) {
   const [copied, setCopied] = useState(false);
-  console.log(inviter);
-
   if (!isOpen) return null;
 
   const baseUrl =

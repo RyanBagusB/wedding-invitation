@@ -31,18 +31,9 @@ export default function InvitationsWrapper({ inviter, initialInvitations, userId
     let payload = { ...updated };
 
     if (updated.arrivalTime && updated.arrivalTime !== "-") {
-      const [hours, minutes] = updated.arrivalTime.split(":").map(Number);
+      const dateStr = "2025-11-08";
 
-      const now = new Date();
-      const jakartaDate = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
-        hours,
-        minutes
-      );
-
-      payload.arrivalTime = jakartaDate.toISOString();
+      payload.arrivalTime = `${dateStr}T${updated.arrivalTime}:00.000z`;
     }
 
     const res = await fetch(`/api/invitations/${updated.id}`, {

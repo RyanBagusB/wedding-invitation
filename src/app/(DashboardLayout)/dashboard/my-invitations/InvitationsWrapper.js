@@ -5,7 +5,9 @@ import MyInvitationsTable from "./MyInvitationsTable";
 import AddInvitationForm from "./AddInvitationForm";
 import Breadcrumbs from "../../components/ui/Breadcrumbs";
 import Card from "../../components/ui/card/Index";
-import { UserCheck, Search } from "lucide-react";
+import { UserCheck, Search, Download } from "lucide-react";
+import Button from "../../components/ui/Button";
+import * as XLSX from "xlsx";
 
 export default function InvitationsWrapper({ inviter, initialInvitations, userId }) {
   const [invitations, setInvitations] = useState(initialInvitations);
@@ -32,7 +34,6 @@ export default function InvitationsWrapper({ inviter, initialInvitations, userId
 
     if (updated.arrivalTime && updated.arrivalTime !== "-") {
       const dateStr = "2025-11-08";
-
       payload.arrivalTime = `${dateStr}T${updated.arrivalTime}:00.000z`;
     }
 
@@ -82,6 +83,32 @@ export default function InvitationsWrapper({ inviter, initialInvitations, userId
     return true;
   });
 
+  // 🔹 Download Excel handler
+  const handleDownload = () => {
+    if (filtered.length === 0) {
+      alert("Tidak ada data untuk diunduh.");
+      return;
+    }
+
+    // Siapkan data Excel
+    const data = filtered.map((inv, index) => ({
+      No: index + 1,
+      "Nama Tamu": inv.guestName,
+      // "Status Dikirim": inv.sentStatus ? "Sudah" : "Belum",
+      // "Konfirmasi": inv.rsvpStatus || "-",
+      // "Kehadiran": inv.scanned ? "Hadir" : "Tidak Hadir",
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Tamu");
+
+    // Simpan file Excel
+    const filterName =
+      filter === "ALL" ? "Tamu_saya" : `Filter_${filter.replace(/_/g, "-")}`;
+    XLSX.writeFile(workbook, `Daftar_Tamu_${filterName}.xlsx`);
+  };
+
   return (
     <div className="flex flex-col space-y-8">
       <div className="flex items-end justify-between">
@@ -91,8 +118,18 @@ export default function InvitationsWrapper({ inviter, initialInvitations, userId
           </h2>
           <Breadcrumbs />
         </div>
+        <div className="flex flex-col gap-y-2">
+          <AddInvitationForm onAdd={handleAdd} />
 
-        <AddInvitationForm onAdd={handleAdd} />
+          {/* 🔹 Tombol Download dengan ikon */}
+          <Button
+            variant="blue"
+            onClick={handleDownload}
+          >
+            <Download className="w-4 h-4" />
+            Download Excel
+          </Button>
+        </div>
       </div>
 
       <Card>

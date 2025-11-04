@@ -9,8 +9,9 @@ import img1 from "../../../../images/pembuka.jpg";
 import img2 from "../../../../images/save-the-date.jpeg";
 import img3 from "../../../../images/akad-nikah.jpeg";
 import img4 from "../../../../images/resepsi.jpeg";
+import img5 from "../../../../images/gallery.jpeg";
 
-const images = [img1, img2, img3, img4];
+const images = [img1, img2, img3, img4, img5];
 
 export default function GallerySection() {
   const [selected, setSelected] = useState(0);

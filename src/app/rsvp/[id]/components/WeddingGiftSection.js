@@ -29,7 +29,6 @@ export default function GiftSection() {
     <section className="space-y-6 bg-[#5E5E5E50] p-8 text-white flex flex-col justify-center items-center">
       {/* Judul */}
       <div className="text-center flex flex-col justify-center items-center gap-y-6">
-        <Image src={img1} alt="" className="object-cover aspect-video" />
         <h2 className="font-analogue text-4xl italic text-center">
           Wedding Gift
         </h2>
